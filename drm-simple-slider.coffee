@@ -1,88 +1,77 @@
 ###############################################################################
 # A simple jQuery slider
 ###############################################################################
+"use strict"
 
 ( ($) ->
-
-    drmSimpleSlider = {
-        slider: $ '.drm-simple-slider'
-        slideHolder: $ '.drm-simple-slide-holder'
-        slideList: $ '.drm-simple-slider-list'        
-
-        config: {
-            play: 10000
-            speed: 300
-            animate: 'yes'
-        }
-
-        init: (config) ->
-            $.extend @.config, config
-            slides = @.slideHolder.find '.drm-simple-slide'
+    class window.DrmSimpleSlider
+        constructor: (@slider = $('div.drm-simple-slider'), @play = 10000, @speed = 300, @animate = yes) ->
+            self = @
+            @slideHolder = self.slider.find('div').first()
+            @slides = self.slideHolder.find 'div.drm-simple-slide'
+            @slideList = self.createSlideList()
+            sliderControls = self.slider.find('div.drm-simple-slider-nav').find 'button'
             current = 0
-            sliderControls = $('.drm-simple-slider-nav').find 'button'
+
+            advanceImage = ->
+                last = self.slides.length - 1
+                current = self.getCurrent()
+                dir = $(@).data 'dir'
+
+                nextImage = (current) ->
+                    if current is last then next = 0 else next = current + 1
+                    next
+                prevImage = (current) ->
+                    if current is 0 then next = last else next = current - 1
+                    next
+                next = if dir is 'prev' then prevImage(current) else nextImage(current)
+
+                self.replaceImage(current, next)
 
             ## Initialize
             
-            if slides.length > 1
+            if self.slides.length > 1
                 sliderControls.show()
-                @.slideList.show()
-                @.slideList.find('button').first().addClass 'active'
-                slides.hide()
-                slides.first().show()
+                self.slideList.appendTo self.slideHolder
+                self.slideList.find('button').first().addClass 'active'
+                self.slides.hide()
+                self.slides.first().show()
             else
                 sliderControls.hide()
-                @.slideList.hide()
-                slides.first().show()
+                self.slideList.hide()
+                self.slides.first().show()
 
-            if drmSimpleSlider.config.animate == 'yes'
-                begin = @.startShow()
-                pause = -> drmSimpleSlider.pauseShow begin
+            unless self.animate is no
+                begin = self.startShow()
+                pause = -> self.pauseShow begin
                 $(window).on 'load', $.proxy begin
-                @.slideHolder.on 'mouseenter', pause
+                self.slideHolder.on 'mouseenter', pause
 
-            sliderControls.on 'click', @.advanceImage
-            @.slideList.on 'click', 'button', @.goToImage
+            sliderControls.on 'click', advanceImage
+            self.slideList.on 'click', 'button', ->
+                current = self.getCurrent()
+                next = $(@).data 'item-num'
+                self.replaceImage(current, next)
 
-        getCurrent: ->            
-            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
-            currentSlide = slides.not ':hidden'
-            current = slides.index currentSlide
+        createSlideList: =>
+            li = ''
+            $.each @slides, (index) ->
+                li += "<li><button data-item-num='#{index}'></button></li>"
+            slideList = $ '<ul></ul>',
+                class: 'drm-simple-slider-list'
+                html: li
+            slideList
 
-            return current
+        getCurrent: ->
+            currentSlide = @slides.not ':hidden'
+            current = @slides.index currentSlide
 
-        advanceImage: ->
-            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
-            last = slides.length - 1
-            current = drmSimpleSlider.getCurrent()
-            dir = $(@).data 'dir'
-
-            nextImage = (current) ->
-                if current == last
-                    next = 0
-                else    
-                    next = current + 1
-                return next
-
-            prevImage = (current) ->
-                if current == 0
-                    next = last
-                else
-                    next = current - 1
-                return next
-
-            next = if dir == 'prev' then prevImage(current) else nextImage(current)
-
-            drmSimpleSlider.replaceImage(current, next)       
-
-        goToImage: ->
-            current = drmSimpleSlider.getCurrent()
-            next = $(@).data 'item-num'
-            drmSimpleSlider.replaceImage(current, next)
+            current
 
         replaceImage: (current, next) ->
-            links = drmSimpleSlider.slideList.find 'button'
-            speed = drmSimpleSlider.config.speed
-            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
+            links = @slideList.find 'button'
+            speed = @speed
+            slides = $ @slides
 
             slides.eq(current).fadeOut speed, ->
                 slides.eq(next).fadeIn speed
@@ -90,19 +79,17 @@
                 links.eq(next).addClass 'active'
 
         startShow: ->
-            slides = drmSimpleSlider.slideHolder.find '.drm-simple-slide'
             nextControl = $('.drm-simple-slider-nav').find "button[data-dir='next']"
 
-            if slides.length > 1              
+            unless @slides.length is 0            
                 start = setInterval ->
                     nextControl.trigger 'click'
-                , drmSimpleSlider.config.play
-            return start
+                , @play
+            start
 
         pauseShow: (start) ->
             clearInterval start
-    }
-
-    drmSimpleSlider.init()
+            
+    new DrmSimpleSlider()
 
 ) jQuery
