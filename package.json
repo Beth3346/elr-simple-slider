@@ -1,0 +1,37 @@
+{
+    "name": "drm-accordion",
+    "version": "0.0.3",
+    "description": "accordion content",
+    "main": "dist/drm-accordion.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "jquery",
+        "javascript",
+        "ux",
+        "accordion"
+    ],
+    "homepage": "http://dynamicresponsewebsites.net/drm-utilities/drm-accordion.html",
+    "license": "MIT",
+    "author": {
+        "name": "Elizabeth Rogers",
+        "email": "beth@elizabeth-rogers.com",
+        "url": "http://elizabeth-rogers.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dynamicresponsemedia/drm-accordion.git"
+    },
+    "devDependencies": {
+        "coffee-script": "1.7.1",
+        "grunt": "~0.4.4",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-uglify": "~0.4.0",
+        "grunt-contrib-coffee": "~0.10.1",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-contrib-jshint": "~0.9.2",
+        "grunt-contrib-copy": "~0.5.0"
+    }
+}
