@@ -3,39 +3,40 @@
 ###############################################################################
 "use strict"
 
+$ = jQuery
 class @DrmSimpleSlider
     constructor: (@slider = $('div.drm-simple-slider'), @play = 10000, @speed = 300, @animate = no) ->
         self = @
         @slideHolder = self.slider.find('div').first()
         @slides = self.slideHolder.find 'div.drm-simple-slide'
         @slideList = self.createSlideList()
-        sliderControls = self.slider.find('div.drm-simple-slider-nav').find 'button'
+        _sliderControls = self.slider.find('div.drm-simple-slider-nav').find 'button'
         current = 0
 
         advanceImage = ->
-            last = self.slides.length - 1
+            _last = self.slides.length - 1
             current = self.getCurrent()
-            dir = $(@).data 'dir'
+            _dir = $(@).data 'dir'
 
-            nextImage = (current) ->
-                if current is last then 0 else current + 1
-            prevImage = (current) ->
-                if current is 0 then last else current - 1
+            _nextImage = (current) ->
+                if current is _last then 0 else current + 1
+            _prevImage = (current) ->
+                if current is 0 then _last else current - 1
                 
-            next = if dir is 'prev' then prevImage(current) else nextImage(current)
+            next = if _dir is 'prev' then _prevImage(current) else _nextImage(current)
 
             self.replaceImage current, next
 
         ## Initialize
         
         if self.slides.length > 1
-            sliderControls.show()
+            _sliderControls.show()
             self.slideList.appendTo self.slideHolder
             self.slideList.find('button').first().addClass 'active'
             self.slides.hide()
             self.slides.first().show()
         else
-            sliderControls.hide()
+            _sliderControls.hide()
             self.slideList.hide()
             self.slides.first().show()
 
@@ -45,7 +46,7 @@ class @DrmSimpleSlider
             $(window).on 'load', $.proxy begin
             self.slideHolder.on 'mouseenter', pause
 
-        sliderControls.on 'click', advanceImage
+        _sliderControls.on 'click', advanceImage
         self.slideList.on 'click', 'button', ->
             current = self.getCurrent()
             next = $(@).data 'item-num'
