@@ -1,8 +1,8 @@
 {
-    "name": "drm-accordion",
-    "version": "0.0.3",
-    "description": "accordion content",
-    "main": "dist/drm-accordion.js",
+    "name": "elr-simple-slider",
+    "version": "1.0.0",
+    "description": "simple slider content",
+    "main": "dist/elr-simple-slider.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -10,9 +10,9 @@
         "jquery",
         "javascript",
         "ux",
-        "accordion"
+        "slider"
     ],
-    "homepage": "http://dynamicresponsewebsites.net/drm-utilities/drm-accordion.html",
+    "homepage": "http://elizabeth-rogers.com/elr-utilities/elr-simple-slider.html",
     "license": "MIT",
     "author": {
         "name": "Elizabeth Rogers",
@@ -21,17 +21,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/dynamicresponsemedia/drm-accordion.git"
+        "url": "https://github.com/elr-utilities/elr-simple-slider.git"
     },
     "devDependencies": {
-        "coffee-script": "1.7.1",
         "grunt": "~0.4.4",
         "grunt-contrib-concat": "~0.3.0",
         "grunt-contrib-uglify": "~0.4.0",
-        "grunt-contrib-coffee": "~0.10.1",
-        "grunt-contrib-watch": "~0.6.1",
         "grunt-contrib-clean": "~0.5.0",
-        "grunt-contrib-jshint": "~0.9.2",
-        "grunt-contrib-copy": "~0.5.0"
+        "grunt-contrib-jshint": "~0.9.2"
     }
 }

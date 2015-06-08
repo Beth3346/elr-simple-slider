@@ -1,16 +1,21 @@
-# DRM Simple Slider
+# ELR Simple Slider
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-Simple jQuery slider
-Requires jQuery
+A jQuery component
 
-## Features:
+### Dependencies:
 
-## Usage:
++ jQuery
 
-### Initialize:
+### Features:
 
-#### Options:
+### Config:
 
-#### Examples:
+### Example Usage:
+
+#### Sample html
+
+###License
+
+ELR-Simple Slider is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
