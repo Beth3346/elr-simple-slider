@@ -1,0 +1,32 @@
+{
+  "name": "elr-simple-slider",
+  "version": "1.0.0",
+  "homepage": "https://github.com/elr-utilities/elr-simple-slider",
+  "authors": [
+    "Elizabeth Rogers <beth@elizabeth-rogers.com>"
+  ],
+  "description": "Javascript Content Slider",
+  "main": "dist/elr-simple-slider.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "slider",
+    "slideshow",
+    "jquery",
+    "javascript",
+    "ui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
