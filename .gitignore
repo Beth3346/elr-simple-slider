@@ -223,3 +223,4 @@ dwsync.xml
 /.sass-cache/
 /bower_components/
 .npmignore
+/dist/
