@@ -1,6 +1,6 @@
 {
   "name": "elr-simple-slider",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a basic content simple-slider",
   "main": "dist/elr-simple-slider.js",
   "repository": {
