@@ -1,4 +1,4 @@
-import elrUtlities from 'elr-utilities';
+import elrUtlities from 'elr-utility-lib';
 const $ = require('jquery');
 
 let elr = elrUtlities();
