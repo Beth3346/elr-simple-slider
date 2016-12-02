@@ -1,14 +1,11 @@
 {
   "name": "elr-simple-slider",
-  "version": "1.0.2",
   "description": "a basic content simple-slider",
-  "main": "dist/elr-simple-slider.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/elr-utilities/elr-simple-slider.git"
-  },
-  "scripts": {
-    "build": "build"
+  "version": "1.0.2",
+  "author": "Elizabeth Rogers",
+  "bugs": {
+    "url": "https://github.com/Beth3346/elr-simple-slider",
+    "email": "beth@elizabeth-rogers.com"
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
@@ -24,5 +21,18 @@
     "gulp-jshint": "^2.0.1",
     "gulp-sourcemaps": "^2.1.1",
     "jshint": "^2.9.3"
+  },
+  "homepage": "http://www.elizabeth-rogers.com/elr-utilities/js-simple-slider.html",
+  "keywords": [
+    "javascript, jquery, slideshow, image, ui"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "main": "dist/elr-simple-slider.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elr-utilities/elr-simple-slider.git"
+  },
+  "scripts": {
+    "build": "build"
   }
 }
