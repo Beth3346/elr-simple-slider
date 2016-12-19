@@ -127,7 +127,7 @@ const elrSimpleSlider = function({
 
             return (dir === 'next') ? 0 : numSlides - 1;
         },
-        moveSlide($slideHolder, $slides) {
+        moveSlide(dir, $slideHolder, $slides) {
             const numSlides = $slides.length;
             const slideWidth = parseInt($slides.first().width(), 10);
             const pos = $slideHolder.position().left;
@@ -150,12 +150,12 @@ const elrSimpleSlider = function({
             if (dir === 'next' && current === lastSlide) {
                 return self.makeNewSlides(lastSlide, 'next', $slides, $slideHolder);
             } else if (dir === 'next') {
-                return self.moveSlide($slideHolder, $slides);
+                return self.moveSlide('next', $slideHolder, $slides);
             } else if (dir === 'prev' && current === 0) {
                 return self.makeNewSlides(0, 'prev', $slides, $slideHolder);
             }
 
-            return self.moveSlide($slideHolder, $slides);
+            return self.moveSlide('prev', $slideHolder, $slides);
         },
         advanceSlide(current, dir, $slideHolder) {
             const $slides = $slideHolder.find(`.${slideClass}`);
