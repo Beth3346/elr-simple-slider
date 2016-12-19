@@ -224,3 +224,5 @@ dwsync.xml
 /bower_components/
 .npmignore
 /dist/
+/coverage/
+/.nyc_output/

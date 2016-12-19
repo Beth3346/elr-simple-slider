@@ -9,30 +9,62 @@
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
-    "elr-utility-lib": "^1.0.5",
+    "elr-ui": "^0.1.0",
     "jquery": "^3.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-preset-es2015": "^6.14.0",
+    "chai": "^3.5.0",
+    "chai-arrays": "0.0.1",
+    "chai-jquery": "^2.0.0",
+    "chai-shallow-deep-equal": "^1.4.4",
+    "chai-subset": "^1.3.0",
+    "codecov": "^1.0.1",
     "del": "^2.2.2",
+    "ghooks": "^1.3.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-jshint": "^2.0.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^2.1.1",
-    "jshint": "^2.9.3"
+    "jshint": "^2.9.3",
+    "mocha": "^3.2.0",
+    "mocha-notifier-reporter": "^0.1.2",
+    "nyc": "^10.0.0"
   },
   "homepage": "http://www.elizabeth-rogers.com/elr-utilities/js-simple-slider.html",
   "keywords": [
     "javascript, jquery, slideshow, image, ui"
   ],
   "license": "SEE LICENSE IN LICENSE.md",
-  "main": "dist/elr-simple-slider.js",
+  "main": "dist/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/elr-utilities/elr-simple-slider.git"
   },
+  "config": {
+    "ghooks": {
+      "pre-commit": "gulp"
+    }
+  },
+  "nyc": {
+    "check-coverage": true,
+    "branches": 0,
+    "functions": 0,
+    "lines": 0,
+    "statements": 0,
+    "include": [
+      "src/*.js"
+    ]
+  },
   "scripts": {
-    "build": "build"
+    "build": "build",
+    "test": "nyc mocha test/test.js --compilers js:babel-core/register",
+    "test watch": "nyc mocha test/test.js watch --compilers js:babel-core/register",
+    "cover": "nyc --reporter=lcov npm test",
+    "report-coverage": "cat ./coverage/lcov.info | codecov"
   }
 }

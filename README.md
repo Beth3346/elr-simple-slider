@@ -1,4 +1,9 @@
-# elr-simple-slider 
+# elr-simple-slider
+
+[![Build Status](https://travis-ci.org/Beth3346/elr-simple-slider.svg?branch=master)](https://travis-ci.org/Beth3346/elr-simple-slider)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![codecov](https://codecov.io/gh/Beth3346/elr-simple-slider/branch/master/graph/badge.svg)](https://codecov.io/gh/Beth3346/elr-simple-slider)
+[![npm](https://img.shields.io/npm/dm/elr-simple-slider.svg?style=flat)]()
 
 a basic content simple-slider
 

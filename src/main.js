@@ -1,7 +1,7 @@
-import elrUtlities from 'elr-utility-lib';
+import elrUI from 'elr-ui';
 const $ = require('jquery');
 
-let elr = elrUtlities();
+let ui = elrUI();
 
 const elrSimpleSlider = function({
     sliderClass = 'elr-simple-slider',
@@ -28,7 +28,7 @@ const elrSimpleSlider = function({
                 }
             });
 
-            return elr.createElement('ul', {
+            return ui.createElement('ul', {
                 'class': slideListClass,
                 'html': li
             });
@@ -199,7 +199,7 @@ const elrSimpleSlider = function({
         },
         pauseShow(start) {
             clearInterval(start);
-            console.log('slider paused');
+            // console.log('slider paused');
         }
     };
 
@@ -210,7 +210,7 @@ const elrSimpleSlider = function({
             const $slideHolder = $currentSlider.find(`.${slideHolderClass}`);
             const $slides = $slideHolder.find(`.${slideClass}`);
             const $currentSliderControls = $currentSlider.find(`.${navClass}`).find('button');
-            const $nextControl = $currentSlider.find(`.${navClass}`).find("button[data-dir='next']");
+            const $nextControl = $currentSlider.find(`.${navClass}`).find(`button[data-dir='next']`);
             const $body = $('body');
             let $slideList;
             let begin;
