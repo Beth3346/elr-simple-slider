@@ -89,89 +89,82 @@ const elrSimpleSlider = function({
                 return current - 1;
             }
         },
-        slideLeft(current, dir, $slides, $slideHolder) {
-            // TODO: fix bug where paging doesn't work properly when paging from first to last slide
-
-            const lastSlide = $slides.length - 1;
+        makeNewSlides(current, dir, $slides, $slideHolder) {
             const slideWidth = parseInt($slides.first().width(), 10);
+            let $oldSlides = $slides;
+            let $newSlides = $slides.clone();
+            let numSlides = $slides.length;
+            let width = slideWidth * numSlides;
             const pos = $slideHolder.position().left;
+            let newPos;
+            let left;
 
             isAnimating = true;
 
-            if (dir === 'next' && current === lastSlide) {
-                let $oldSlides = $slides;
-                let $newSlides = $slides.clone();
-                let numSlides = $slides.length;
-
+            if (dir === 'next') {
                 $slideHolder.css('width', slideWidth * (numSlides * 2));
                 $slideHolder.append($newSlides);
-                let newPos = pos - slideWidth;
-
-                $slideHolder.stop().animate({
-                    left: newPos
-                }, speed, 'linear', function() {
-                    $slideHolder.css({
-                        'width': slideWidth * numSlides,
-                        'left': 0
-                    });
-                    $oldSlides.remove();
-                    isAnimating = false;
-                });
-
-                return 0;
-            } else if (dir === 'next') {
-                let newPos = pos - slideWidth;
-
-                $slideHolder.stop().animate({
-                    left: newPos
-                }, speed, 'linear', function() {
-                    isAnimating = false;
-                });
-
-                return (Math.abs(newPos) / slideWidth);
-            } else if (dir === 'prev' && current === 0) {
-                let $oldSlides = $slides;
-                let $newSlides = $slides.clone();
-                let numSlides = $slides.length;
-                let width = slideWidth * numSlides;
-
+                newPos = pos - slideWidth;
+                left = 0;
+            } else {
                 $slideHolder.css('width', width * 2);
                 $slideHolder.prepend($newSlides);
                 $slideHolder.css('left', -width);
-                let newPos = -width + slideWidth;
-
-                $slideHolder.stop().animate({
-                    left: newPos
-                }, speed, 'linear', function() {
-                    $slideHolder.css({
-                        'width': width,
-                        'left': -(width - slideWidth)
-                    });
-                    $oldSlides.remove();
-                    isAnimating = false;
-                });
-
-                return numSlides - 1;
-            } else {
-                let newPos = pos + slideWidth;
-
-                $slideHolder.stop().animate({
-                    left: newPos
-                }, speed, 'linear', function() {
-                    isAnimating = false;
-                });
-
-                return (Math.abs(newPos) / slideWidth);
+                newPos = -width + slideWidth;
+                left = -(width - slideWidth);
             }
+
+            $slideHolder.stop().animate({
+                left: newPos
+            }, speed, 'linear', function() {
+                $slideHolder.css({
+                    'width': width,
+                    'left': left
+                });
+                $oldSlides.remove();
+                isAnimating = false;
+            });
+
+            return (dir === 'next') ? 0 : numSlides - 1;
+        },
+        moveSlide($slideHolder, $slides) {
+            const numSlides = $slides.length;
+            const slideWidth = parseInt($slides.first().width(), 10);
+            const pos = $slideHolder.position().left;
+            const newPos = (dir = 'next') ? pos - slideWidth : pos + slideWidth;
+
+            isAnimating = true;
+
+            $slideHolder.stop().animate({
+                left: newPos
+            }, speed, 'linear', function() {
+                isAnimating = false;
+            });
+
+            return (Math.abs(newPos) / slideWidth);
+        },
+        slideLeft(current, dir, $slides, $slideHolder) {
+            // TODO: fix bug where paging doesn't work properly when paging from first to last slide
+            const lastSlide = $slides.length - 1;
+
+            if (dir === 'next' && current === lastSlide) {
+                return self.makeNewSlides(lastSlide, 'next', $slides, $slideHolder);
+            } else if (dir === 'next') {
+                return self.moveSlide($slideHolder, $slides);
+            } else if (dir === 'prev' && current === 0) {
+                return self.makeNewSlides(0, 'prev', $slides, $slideHolder);
+            }
+
+            return self.moveSlide($slideHolder, $slides);
         },
         advanceSlide(current, dir, $slideHolder) {
             const $slides = $slideHolder.find(`.${slideClass}`);
 
-            if (effect === 'fade') {
-                return self.fadeSlide(current, dir, $slides);
-            } else if (effect === 'slide-left') {
+            if (effect === 'slide-left') {
                 return self.slideLeft(current, dir, $slides, $slideHolder);
             }
+
+            return self.fadeSlide(current, dir, $slides);
         },
         pageSlide(e, $slideHolder) {
             const current = self.getCurrent($slideHolder);
